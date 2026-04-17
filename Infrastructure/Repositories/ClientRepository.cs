@@ -7,7 +7,7 @@ namespace Infrastructure.Repositories;
 
 public class ClientRepository : IClientRepository
 {
-    ApplicationDbContext _applicationDbContext;
+    private readonly ApplicationDbContext _applicationDbContext;
     
     public ClientRepository(ApplicationDbContext applicationDbContext)
     {
@@ -32,17 +32,19 @@ public class ClientRepository : IClientRepository
     public async Task AddAsync(Client client)
     {
         await _applicationDbContext.Clients.AddAsync(client);
-        await _applicationDbContext.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Client client)
+    public Task UpdateAsync(Client client)
     {
-        await _applicationDbContext.SaveChangesAsync();
+        _applicationDbContext.Clients.Update(client);
+        return Task.CompletedTask;
     }
 
     public async Task DeleteByIdAsync(int id)
     {
-        _applicationDbContext.Clients.Remove(_applicationDbContext.Clients.FirstOrDefault(x => x.Id == id));
-        await _applicationDbContext.SaveChangesAsync();
+        var client = await _applicationDbContext.Clients.FindAsync(id);
+        
+        if(client is not null)
+            _applicationDbContext.Clients.Remove(client);
     }
 }
