@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class AppointmentDetailsRepository : IAppointmentDetailsRepository
+internal class AppointmentDetailsRepository : IAppointmentDetailsRepository
 {
     private readonly ApplicationDbContext  _applicationDbContext;
 

@@ -11,7 +11,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Appointment> Appointments { get; set; }
     public DbSet<AppointmentDetails> AppointmentDetails { get; set; }
     
-    ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
         
     }

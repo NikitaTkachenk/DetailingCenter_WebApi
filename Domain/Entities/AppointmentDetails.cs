@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Domain;
 
 public class AppointmentDetails
 {
+    [Key]
     public int AppointmentId { get; set; }
     
     public string Description { get; set; } = null!;

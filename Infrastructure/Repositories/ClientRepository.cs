@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class ClientRepository : IClientRepository
+internal class ClientRepository : IClientRepository
 {
     private readonly ApplicationDbContext _applicationDbContext;
     
