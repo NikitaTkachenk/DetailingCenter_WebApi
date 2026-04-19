@@ -7,9 +7,9 @@ public class Appointment
     public int ClientId { get; set; }
     
     public string Name { get; set; } = null!;
-    
-    
-    public AppointmentDetails AppointmentDetails { get; set; } = new();
+
+
+    public AppointmentDetails AppointmentDetails { get; set; } = null!;
     
     public Client Client { get; set; } = new();
 }

@@ -42,4 +42,9 @@ internal class AppointmentDetailsRepository : IAppointmentDetailsRepository
         if(appointmentDetails is not null)
             _applicationDbContext.AppointmentDetails.Remove(appointmentDetails);
     }
+    
+    public async Task SaveInfo()
+    {
+        await _applicationDbContext.SaveChangesAsync();
+    }
 }

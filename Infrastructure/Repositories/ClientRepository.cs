@@ -47,4 +47,9 @@ internal class ClientRepository : IClientRepository
         if(client is not null)
             _applicationDbContext.Clients.Remove(client);
     }
+
+    public async Task SaveInfo()
+    {
+        await _applicationDbContext.SaveChangesAsync();
+    }
 }

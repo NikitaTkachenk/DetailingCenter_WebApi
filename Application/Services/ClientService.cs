@@ -3,6 +3,7 @@ using Application.DTO.AppointmentDetails;
 using Application.DTO.Client;
 using Application.Interfaces.IRepositories;
 using Application.Interfaces.IServices;
+using Domain;
 
 namespace Application.Services;
 
@@ -40,23 +41,70 @@ internal class ClientService : IClientService
         return _clientsResponse;
     }
 
-    public Task<ResponseClientDTO?> GetByIdAsync(int id)
+    public async Task<ResponseClientDTO?> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var client = await _repository.GetByIdAsync(id);
+
+        if (client is null)
+            return null;
+
+        var clientById = new ResponseClientDTO
+        {
+            Name = client.Name,
+            LastName = client.LastName,
+            Age = client.Age,
+            Email = client.Email,
+            
+            Appointments = client.Appointments.Select(a => new ResponseAppointmentDTO
+            {
+                Name = a.Name,
+                AppointmentDetails = new ResponseAppointmentDetailsDTO
+                {
+                    Description = a.AppointmentDetails.Description,
+                    Price = a.AppointmentDetails.Price,
+                    AppointmentAt = a.AppointmentDetails.AppointmentAt
+                }
+            }).ToList()
+        };
+        
+        return clientById;
     }
 
-    public Task AddAsync(CreateClientDTO clientDto)
+    public async Task AddAsync(CreateClientDTO clientDto)
     {
-        throw new NotImplementedException();
+        var newClient = new Client
+        {
+            Name = clientDto.Name,
+            LastName = clientDto.LastName,
+            Email = clientDto.Email,
+            Age = clientDto.Age
+        };
+        
+        await _repository.AddAsync(newClient);
+        await _repository.SaveInfo();
     }
 
-    public Task UpdateAsync(UpdateClientDTO clientDto)
+    public async Task UpdateAsync(int id, UpdateClientDTO clientDto)
     {
-        throw new NotImplementedException();
+        var client = await _repository.GetByIdAsync(id);
+
+        if (client is not null)
+        {
+            client.Name = clientDto.Name;
+            client.LastName = clientDto.LastName;
+            client.Age = clientDto.Age;
+            client.Email = clientDto.Email;
+        }
+        else
+            return;
+        
+        await _repository.UpdateAsync(client);
+        await _repository.SaveInfo();
     }
 
-    public Task DeleteByIdAsync(int id)
+    public async Task DeleteByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        await _repository.DeleteByIdAsync(id);
+        await _repository.SaveInfo();
     }
 }

@@ -13,4 +13,6 @@ public interface IAppointmentRepository
     public Task UpdateAsync(Appointment appointment);
     
     public Task DeleteByIdAsync(int id);
+    
+    public Task SaveInfo();
 }

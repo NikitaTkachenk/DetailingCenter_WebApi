@@ -13,4 +13,6 @@ public interface IClientRepository
     public Task UpdateAsync(Client client);
     
     public Task DeleteByIdAsync(int id);
+
+    public Task SaveInfo();
 }

@@ -45,4 +45,9 @@ internal class AppointmentRepository : IAppointmentRepository
         if(appointment is not null)
             _applicationDbContext.Appointments.Remove(appointment);
     }
+    
+    public async Task SaveInfo()
+    {
+        await _applicationDbContext.SaveChangesAsync();
+    }
 }
