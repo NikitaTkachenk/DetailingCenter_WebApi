@@ -10,6 +10,6 @@ public class Appointment
 
 
     public AppointmentDetails AppointmentDetails { get; set; } = null!;
-    
-    public Client Client { get; set; } = new();
+
+    public Client Client { get; set; } = null!;
 }

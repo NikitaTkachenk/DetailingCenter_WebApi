@@ -29,6 +29,7 @@ internal class ClientService : IClientService
             
             Appointments = x.Appointments.Select(a => new ResponseAppointmentDTO
             {
+                ClientId = a.ClientId,
                 Name = a.Name,
                 AppointmentDetails = new ResponseAppointmentDetailsDTO
                 {
@@ -57,6 +58,7 @@ internal class ClientService : IClientService
             
             Appointments = client.Appointments.Select(a => new ResponseAppointmentDTO
             {
+                ClientId = a.ClientId,
                 Name = a.Name,
                 AppointmentDetails = new ResponseAppointmentDetailsDTO
                 {

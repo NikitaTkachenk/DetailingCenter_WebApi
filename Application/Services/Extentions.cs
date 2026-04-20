@@ -8,6 +8,7 @@ public static class Extentions
     public static IServiceCollection AddBusinessLogic(this IServiceCollection services)
     {
         services.AddScoped<IClientService, ClientService>();
+        services.AddScoped<IAppointmentService, AppointmentService>();
         return services;
     } 
 }

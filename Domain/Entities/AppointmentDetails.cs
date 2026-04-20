@@ -12,7 +12,7 @@ public class AppointmentDetails
     public DateTime AppointmentAt  { get; set; }
     
     public decimal Price { get; set; }
-    
 
-    public Appointment Appointment { get; set; } = new();
+
+    public Appointment Appointment { get; set; } = null!;
 }
