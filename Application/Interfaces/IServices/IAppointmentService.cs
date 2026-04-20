@@ -1,11 +1,12 @@
 using Application.DTO.Appointment;
 using Application.DTO.Client;
+using Application.Filters;
 
 namespace Application.Interfaces.IServices;
 
 public interface IAppointmentService
 {
-    public Task<IEnumerable<ResponseAppointmentDTO>> GetAllAsync();
+    public Task<IEnumerable<ResponseAppointmentDTO>> GetAllAsync(AppointmentFilter appointmentFilter);
     
     public Task<ResponseAppointmentDTO> GetByIdAsync(int id);
     

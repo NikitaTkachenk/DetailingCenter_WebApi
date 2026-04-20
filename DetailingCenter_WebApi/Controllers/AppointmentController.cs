@@ -1,4 +1,5 @@
 using Application.DTO.Appointment;
+using Application.Filters;
 using Application.Interfaces.IServices;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,9 @@ public class AppointmentController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery] AppointmentFilter filter)
     {
-        var appointment = await _service.GetAllAsync();
+        var appointment = await _service.GetAllAsync(filter);
         return Ok(appointment);
     }
 

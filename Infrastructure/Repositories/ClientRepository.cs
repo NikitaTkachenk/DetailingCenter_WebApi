@@ -1,6 +1,8 @@
+using Application.Filters;
 using Application.Interfaces.IRepositories;
 using Domain;
 using Infrastructure.Data;
+using Infrastructure.ExtentionFilters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
@@ -14,10 +16,11 @@ internal class ClientRepository : IClientRepository
         _applicationDbContext = applicationDbContext;
     }
     
-    public async Task<IEnumerable<Client>> GetAllAsync()
+    public async Task<IEnumerable<Client>> GetAllAsync(ClientFilter filter)
     {
         return await _applicationDbContext.Clients.Include(x => x.Appointments)
                                                                   .ThenInclude(x => x.AppointmentDetails)
+                                                                  .ApplyFilters(filter)
                                                                   .AsNoTracking()
                                                                   .ToListAsync();
     }

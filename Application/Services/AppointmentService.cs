@@ -1,5 +1,6 @@
 using Application.DTO.Appointment;
 using Application.DTO.AppointmentDetails;
+using Application.Filters;
 using Application.Interfaces.IDbContexts;
 using Application.Interfaces.IRepositories;
 using Application.Interfaces.IServices;
@@ -17,12 +18,13 @@ public class AppointmentService : IAppointmentService
         _appointmentRepository = appointmentRepository;
         _clientRepository = clientRepository;
     }
-    public async Task<IEnumerable<ResponseAppointmentDTO>> GetAllAsync()
+    public async Task<IEnumerable<ResponseAppointmentDTO>> GetAllAsync(AppointmentFilter filter)
     {
-        var appointments = await _appointmentRepository.GetAllAsync();
+        var appointments = await _appointmentRepository.GetAllAsync(filter);
 
         var getAllAppointments = appointments.Select(x => new ResponseAppointmentDTO
         {
+            ClientId = x.ClientId,
             Name = x.Name,
             AppointmentDetails = new ResponseAppointmentDetailsDTO
             {

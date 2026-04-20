@@ -1,6 +1,7 @@
 using Application.DTO.Appointment;
 using Application.DTO.AppointmentDetails;
 using Application.DTO.Client;
+using Application.Filters;
 using Application.Interfaces.IRepositories;
 using Application.Interfaces.IServices;
 using Domain;
@@ -16,9 +17,9 @@ internal class ClientService : IClientService
         _repository = repository;
     }
     
-    public async Task<IEnumerable<ResponseClientDTO>> GetAllAsync()
+    public async Task<IEnumerable<ResponseClientDTO>> GetAllAsync(ClientFilter filter)
     {
-        var clients = await _repository.GetAllAsync();
+        var clients = await _repository.GetAllAsync(filter);
         
         var _clientsResponse = clients.Select(x => new ResponseClientDTO
         {

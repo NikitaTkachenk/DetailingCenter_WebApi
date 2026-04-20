@@ -1,10 +1,11 @@
+using Application.Filters;
 using Domain;
 
 namespace Application.Interfaces.IRepositories;
 
 public interface IClientRepository
 {
-    public Task<IEnumerable<Client>> GetAllAsync();
+    public Task<IEnumerable<Client>> GetAllAsync(ClientFilter filter);
     
     public Task<Client?> GetByIdAsync(int id);
     

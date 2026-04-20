@@ -1,10 +1,11 @@
+using Application.Filters;
 using Domain;
 
 namespace Application.Interfaces.IRepositories;
 
 public interface IAppointmentRepository
 {
-    public Task<IEnumerable<Appointment>> GetAllAsync();
+    public Task<IEnumerable<Appointment>> GetAllAsync(AppointmentFilter filter);
     
     public Task<Appointment?> GetByIdAsync(int id);
     

@@ -1,4 +1,5 @@
 using Application.DTO.Client;
+using Application.Filters;
 using Application.Interfaces.IRepositories;
 using Application.Interfaces.IServices;
 using Domain;
@@ -19,9 +20,9 @@ public class ClientController : ControllerBase
     }
 
     [HttpGet("all")]
-    public async Task<IActionResult> GetAllAsync()
+    public async Task<IActionResult> GetAllAsync([FromQuery]ClientFilter filter)
     {
-        var clients = await _clientService.GetAllAsync();
+        var clients = await _clientService.GetAllAsync(filter);
         return Ok(clients);
     }
 
